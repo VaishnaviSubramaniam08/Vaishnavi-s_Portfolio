@@ -10,6 +10,7 @@ import LoadingScreen from './components/LoadingScreen';
 import Contact from './components/Contact';
 import CustomCursor from './components/CustomCursor';
 import FloatingSocialSidebar from './components/FloatingSocialSidebar';
+import AnimatedBackground from './components/AnimatedBackground';
 import { ChevronUp } from 'lucide-react';
 import { animateScroll as scroll } from 'react-scroll';
 
@@ -46,7 +47,7 @@ function App() {
 
   return (
     <>
-      <CustomCursor />
+     <CustomCursor />
       <FloatingSocialSidebar />
       <LoadingScreen onComplete={() => setIsLoading(false)} />
 
@@ -85,6 +86,11 @@ function App() {
         <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden hide-on-light">
           <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] dark:block hidden" />
           <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px] dark:block hidden" />
+        </div>
+
+        {/* Animated Canvas Background - particles, code rain & hexagons */}
+        <div className="dark:block hidden">
+          <AnimatedBackground />
         </div>
       </div>
     </>

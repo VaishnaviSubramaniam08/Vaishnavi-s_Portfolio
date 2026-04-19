@@ -1,76 +1,141 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Globe } from 'lucide-react';
+import { Github, ExternalLink, ChevronRight } from 'lucide-react';
+
+const CardGlint = () => (
+    <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
+        <motion.div
+            initial={{ x: '-100%', opacity: 0 }}
+            whileHover={{ x: '100%', opacity: [0, 1, 0] }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
+        />
+    </div>
+);
 
 const ProjectCard = ({ project, index }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl transition-all flex flex-col h-full"
-    >
-      <div className="relative overflow-hidden aspect-video bg-gray-100 dark:bg-gray-700">
-        {/* Placeholder for project image */}
-        <div className="absolute inset-0 flex items-center justify-center text-primary/20">
-          <Globe size={48} />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-darkNavy/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-          <div className="flex gap-4">
-            <a 
-              href={project.github} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/40 transition-colors"
-            >
-              <Github size={20} />
-            </a>
-            {project.live !== "#" && (
-              <a 
-                href={project.live} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 bg-white/20 backdrop-blur-md rounded-full text-white hover:bg-white/40 transition-colors"
-              >
-                <ExternalLink size={20} />
-              </a>
-            )}
-          </div>
-        </div>
-      </div>
+    const { title, description, tech, features, github, live, icon, category, image } = project;
+    const cardRef = useRef(null);
 
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
-          {project.title}
-        </h3>
-        
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-4 line-clamp-2">
-          <span className="font-semibold text-primary">Problem:</span> {project.problem}
-        </p>
+    return (
+        <motion.div
+            ref={cardRef}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ 
+                opacity: 1, 
+                y: 0,
+                transition: { delay: index * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+            }}
+            viewport={{ once: true }}
+            className="group relative flex flex-col h-full rounded-2xl overflow-hidden border border-slate-200 dark:border-white/[0.08] bg-white dark:bg-darkNavy/80 shadow-sm hover:shadow-2xl transition-all duration-300"
+        >
+            {/* Project Image Header */}
+            <div className="relative h-52 w-full overflow-hidden bg-slate-900">
+                <img
+                    src={image}
+                    alt={title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-70 group-hover:opacity-100"
+                />
+                
+                <CardGlint />
 
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tech.map((t) => (
-            <span 
-              key={t}
-              className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 bg-primary/5 text-primary border border-primary/10 rounded"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
+                {/* Overlay with Category - Strictly Blue/Green */}
+                <div className="absolute top-4 left-4 z-10">
+                    <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 backdrop-blur-md">
+                        {category}
+                    </span>
+                </div>
 
-        <ul className="mt-auto space-y-1">
-          {project.features.map((feature, i) => (
-            <li key={i} className="text-sm text-slate-600 dark:text-slate-400 flex items-start gap-2">
-              <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </motion.div>
-  );
+                {/* Floating Action Buttons */}
+                <div className="absolute top-4 right-4 flex gap-2 z-10 translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
+                    <a
+                        href={github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 transition-colors"
+                    >
+                        <Github size={16} />
+                    </a>
+                    {live !== '#' && (
+                        <a
+                            href={live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 rounded-lg bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/20 transition-colors"
+                        >
+                            <ExternalLink size={16} />
+                        </a>
+                    )}
+                </div>
+
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
+            </div>
+
+            {/* Content Section */}
+            <div className="p-6 flex flex-col flex-grow">
+                <div className="flex items-center gap-2 mb-3">
+                    <span className="text-xl drop-shadow-md">{icon}</span>
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight group-hover:text-blue-500 transition-colors duration-300">
+                        {title}
+                    </h3>
+                </div>
+
+                <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2 mb-4">
+                    {description}
+                </p>
+
+                <div className="space-y-2 mb-6 flex-grow">
+                    {features.slice(0, 2).map((feat, i) => (
+                        <div key={i} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-400 font-medium">
+                            <ChevronRight size={12} className="mt-0.5 shrink-0 text-emerald-500" />
+                            <span className="line-clamp-1">{feat}</span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Tech Tags - Clean and Minimal */}
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                    {tech.slice(0, 4).map((t) => (
+                        <span
+                            key={t}
+                            className={`text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-white-[0.05]`}
+                        >
+                            {t}
+                        </span>
+                    ))}
+                </div>
+
+                {/* Footer CTA - Strictly Blue/Green Theme */}
+                <div className="mt-auto pt-4 border-t border-slate-100 dark:border-white/[0.06]">
+                    <a
+                        href={github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between group/btn"
+                    >
+                        <span className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300 group-hover/btn:text-blue-500 transition-colors uppercase tracking-wider">
+                            Explore Source
+                        </span>
+                        <motion.div
+                            whileHover={{ scale: 1.1, x: 2 }}
+                            className="w-8 h-8 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover/btn:bg-emerald-500 group-hover/btn:text-white transition-all duration-300"
+                        >
+                            <ArrowRightIcon size={14} />
+                        </motion.div>
+                    </a>
+                </div>
+            </div>
+
+            {/* Subtle Hover Glow Overlay - Blue/Green */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+        </motion.div>
+    );
 };
+
+const ArrowRightIcon = ({ size }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12h14m-7-7 7 7-7 7" />
+    </svg>
+);
 
 export default ProjectCard;

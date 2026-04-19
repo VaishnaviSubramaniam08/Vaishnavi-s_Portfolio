@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
+
+  // Motion values
+  const mouseX = useMotionValue(-100);
+  const mouseY = useMotionValue(-100);
+
+  // Inner dot (fast)
+  const innerX = useSpring(mouseX, { stiffness: 500, damping: 30 });
+  const innerY = useSpring(mouseY, { stiffness: 500, damping: 30 });
+
+  // Outer ring (slow = smooth trailing feel)
+  const outerX = useSpring(mouseX, { stiffness: 150, damping: 20 });
+  const outerY = useSpring(mouseY, { stiffness: 150, damping: 20 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
     };
-    
-    // Check if cursor is hovering over clickable elements
+
     const handleMouseOver = (e) => {
+      const target = e.target;
+
       if (
-        e.target.tagName.toLowerCase() === 'a' ||
-        e.target.tagName.toLowerCase() === 'button' ||
-        e.target.closest('a') ||
-        e.target.closest('button') ||
-        e.target.classList.contains('cursor-pointer')
+        target.tagName.toLowerCase() === 'a' ||
+        target.tagName.toLowerCase() === 'button' ||
+        target.closest('a') ||
+        target.closest('button') ||
+        target.classList.contains('cursor-pointer')
       ) {
         setIsHovering(true);
       } else {
@@ -25,35 +39,53 @@ const CustomCursor = () => {
       }
     };
 
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, []);
+  }, [mouseX, mouseY]);
 
   return (
     <>
+      {/* 🔹 Outer Ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border-2 border-primary pointer-events-none z-[9999] mix-blend-difference hidden md:block"
-        animate={{
-          x: mousePosition.x - 16,
-          y: mousePosition.y - 16,
-          scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering ? 'rgba(34, 197, 94, 0.2)' : 'transparent',
+        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[9999] hidden md:block border border-[#22C55E]"
+        style={{
+          x: outerX,
+          y: outerY,
+          translateX: "-50%",
+          translateY: "-50%",
         }}
-        transition={{ type: 'spring', stiffness: 500, damping: 28, mass: 0.5 }}
+        animate={{
+          scale: isHovering ? 1.8 : 1,
+          opacity: isClicking ? 0.6 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
       />
+
+      {/* 🔹 Inner Dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-[9999] hidden md:block"
-        animate={{
-          x: mousePosition.x - 4,
-          y: mousePosition.y - 4,
-          opacity: isHovering ? 0 : 1
+        className="fixed top-0 left-0 w-3 h-3 rounded-full pointer-events-none z-[10000] hidden md:block bg-[#22C55E]"
+        style={{
+          x: innerX,
+          y: innerY,
+          translateX: "-50%",
+          translateY: "-50%",
         }}
-        transition={{ type: 'spring', stiffness: 1000, damping: 40, mass: 0.1 }}
+        animate={{
+          scale: isClicking ? 0.7 : isHovering ? 1.5 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 400, damping: 25 }}
       />
     </>
   );

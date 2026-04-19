@@ -8,12 +8,10 @@ const LoadingScreen = ({ onComplete }) => {
     const timer = setTimeout(() => {
       setIsVisible(false);
       if (onComplete) onComplete();
-    }, 4500); 
+    }, 4500);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
-
-  const particles = Array.from({ length: 15 });
 
   return (
     <AnimatePresence>
@@ -21,139 +19,115 @@ const LoadingScreen = ({ onComplete }) => {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          className="fixed inset-0 z-[200] bg-[#0B1120] flex items-center justify-center overflow-hidden"
+          transition={{ duration: 0.8 }}
+          className="fixed inset-0 z-[9999] bg-[#020617] flex items-center justify-center overflow-hidden"
         >
-          {/* Bird Animation Container */}
-          <motion.div
-            initial={{ x: "-20vw", y: "0vh" }}
-            animate={{ 
-              x: ["-20vw", "20vw", "70vw", "120vw"],
-              y: ["0vh", "2vh", "-2vh", "0vh"],
-              opacity: [0, 1, 1, 0]
-            }}
-            transition={{ 
-              duration: 3.5, 
-              ease: "linear",
-            }}
-            className="relative"
-          >
-            {/* Soft Glowing Trail */}
-            <motion.div 
-              className="absolute top-1/2 right-full h-[3px] w-48 bg-gradient-to-l from-primary/60 via-primary/20 to-transparent blur-[3px] -translate-y-1/2 origin-right"
-              animate={{ opacity: [0, 1, 0], scaleX: [0.5, 1.5, 1] }}
-              transition={{ duration: 3.5 }}
-            />
+          {/* Tech Grid Background */}
+          <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <div className="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:40px_40px]" />
+          </div>
 
-            {/* Sparkle Particles */}
-            {particles.map((_, i) => (
+          <div className="relative flex flex-col items-center justify-center">
+            
+            {/* Spinning Rings Container */}
+            <div className="relative w-64 h-64 flex items-center justify-center">
+              
+              {/* Ring 1 - Outer Blue (Clockwise) */}
               <motion.div
-                key={i}
-                className="absolute w-1.5 h-1.5 bg-primary rounded-full blur-[1px]"
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: [0, 1, 0],
-                  x: [0, -30 - Math.random() * 60],
-                  y: [0, (Math.random() - 0.5) * 50],
-                  scale: [0, 1.5, 0]
-                }}
-                transition={{ 
-                  duration: 1,
-                  delay: (i * 0.1),
-                  repeat: Infinity,
-                  repeatDelay: 0.1
-                }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                className="absolute w-full h-full border-2 border-transparent border-t-[#0A84FF] border-b-[#0A84FF] rounded-full opacity-40 blur-[1px]"
               />
-            ))}
 
-            <svg 
-              width="140" 
-              height="100" 
-              viewBox="0 0 100 80" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-primary drop-shadow-[0_0_20px_rgba(34,197,94,0.6)]"
-            >
-              <g>
-                {/* Dynamic Feather Layers */}
-                <motion.path
-                  d="M30 40 Q45 20 60 40"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  initial={{ opacity: 0, pathLength: 0 }}
-                  animate={{ opacity: 1, pathLength: 1 }}
-                  transition={{ delay: 0.8, duration: 1.2 }}
-                />
-                <motion.path
-                  d="M25 45 Q45 65 65 45"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  initial={{ opacity: 0, pathLength: 0 }}
-                  animate={{ opacity: 0.7, pathLength: 1 }}
-                  transition={{ delay: 1.5, duration: 1.2 }}
-                />
+              {/* Ring 2 - Middle Green (Counter-clockwise) */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                className="absolute w-48 h-48 border-[3px] border-transparent border-l-[#22C55E] border-r-[#22C55E] rounded-full opacity-60"
+              />
 
-                {/* Main Wings */}
-                <motion.g
-                  animate={{ 
-                    rotateZ: [-10, 10, -10],
-                    y: [0, -5, 0]
-                  }}
-                  transition={{ duration: 0.7, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ originX: "50px", originY: "40px" }}
-                >
-                  <motion.path
-                    d="M10 40 Q50 10 90 40"
-                    stroke="currentColor"
-                    strokeWidth="4"
+              {/* Ring 3 - Inner Segmented Blue */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                className="absolute w-32 h-32"
+              >
+                <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_10px_rgba(10,132,255,0.6)]">
+                  <path
+                    d="M 50,10 A 40,40 0 0,1 90,50"
+                    fill="none"
+                    stroke="#0A84FF"
+                    strokeWidth="3"
                     strokeLinecap="round"
-                    animate={{ 
-                      scaleY: [1, -0.5, 1],
-                      y: [0, 10, 0]
-                    }}
-                    transition={{ duration: 0.7, repeat: Infinity, ease: "easeInOut" }}
-                    style={{ originX: "50px", originY: "40px" }}
                   />
-                </motion.g>
+                  <path
+                    d="M 50,90 A 40,40 0 0,1 10,50"
+                    fill="none"
+                    stroke="#22C55E"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </motion.div>
 
-                {/* Core Body */}
-                <path
-                  d="M35 40 L65 40"
-                  stroke="currentColor"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M65 40 L72 36"
-                  stroke="currentColor"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                />
-                <circle cx="75" cy="35" r="2.5" fill="currentColor" />
-              </g>
-            </svg>
-          </motion.div>
+              {/* Center Pulsing Glow */}
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.25, 1],
+                  opacity: [0.3, 0.6, 0.3]
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute w-16 h-16 bg-[#0A84FF]/20 rounded-full blur-md"
+              />
 
-          {/* Premium Loading Text */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1.5 }}
-            className="absolute bottom-24 flex flex-col items-center"
-          >
-            <p className="text-primary/80 font-display font-medium tracking-[0.4em] text-[10px] uppercase mb-4">
-              Loading your experience
-            </p>
-            <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-primary/30 to-transparent relative overflow-hidden">
-              <motion.div 
-                className="absolute inset-0 bg-primary/60 blur-[1px]"
-                animate={{ x: ["-100%", "100%"] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              {/* Center Dot */}
+              <motion.div
+                animate={{ 
+                  scale: [1, 1.5, 1],
+                  boxShadow: [
+                    "0 0 0px #22C55E",
+                    "0 0 20px #22C55E",
+                    "0 0 0px #22C55E"
+                  ]
+                }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                className="relative z-10 w-5 h-5 bg-[#22C55E] rounded-full"
               />
             </div>
-          </motion.div>
+
+            {/* Loading Text & Progress Bar */}
+            <div className="mt-12 flex flex-col items-center gap-4">
+              <motion.div 
+                animate={{ opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="flex items-center gap-3"
+              >
+                <span className="w-2 h-2 bg-[#22C55E] rounded-full shadow-[0_0_8px_#22C55E]" />
+                <span className="text-[#0A84FF] font-mono text-xs tracking-[0.4em] uppercase font-bold">
+                  Initializing Portfolio
+                </span>
+                <span className="w-2 h-2 bg-[#22C55E] rounded-full shadow-[0_0_8px_#22C55E]" />
+              </motion.div>
+
+              <div className="w-48 h-[2px] bg-white/5 rounded-full overflow-hidden">
+                <motion.div
+                  initial={{ x: "-100%" }}
+                  animate={{ x: "0%" }}
+                  transition={{ duration: 4, ease: "easeInOut" }}
+                  className="h-full bg-gradient-to-r from-[#0A84FF] via-[#22C55E] to-[#0A84FF]"
+                />
+              </div>
+
+              <div className="flex gap-2 text-[10px] font-mono text-slate-500 uppercase tracking-widest mt-1">
+                <span>Core</span>
+                <span className="text-[#22C55E]">Loaded</span>
+                <span className="opacity-40">/</span>
+                <span className="text-[#0A84FF]">UI</span>
+                <span className="text-[#22C55E]">Active</span>
+              </div>
+            </div>
+
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
