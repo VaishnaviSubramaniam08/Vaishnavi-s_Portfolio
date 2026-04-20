@@ -19,7 +19,7 @@ const Projects = () => {
       
       {/* Decorative Accents - Static for no-animation cursor experience */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-blue-500/[0.03] rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-primary/[0.03] rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-emerald-500/[0.03] rounded-full blur-[120px]" />
       </div>
 
@@ -41,7 +41,7 @@ const Projects = () => {
                 className="flex items-center gap-6 p-1.5 px-6 py-3 bg-white/40 dark:bg-white/5 backdrop-blur-md rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm"
             >
                 <div className="flex flex-col items-center">
-                    <span className="text-2xl font-black text-blue-500">{PROJECTS.length}</span>
+                    <span className="text-2xl font-black text-primary">{PROJECTS.length}</span>
                     <span className="text-[9px] uppercase tracking-[0.2em] text-slate-400 font-bold">Solutions</span>
                 </div>
                 <div className="w-px h-8 bg-slate-200 dark:bg-white/10" />
@@ -64,14 +64,14 @@ const Projects = () => {
                 onClick={() => setActive(cat)}
                 className={`relative px-6 py-2 rounded-xl text-xs font-bold transition-all duration-300 border
                   ${isActive
-                    ? 'text-white border-transparent shadow-lg shadow-blue-500/10 scale-105'
-                    : 'text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/10 hover:border-blue-500/30 hover:text-blue-500 bg-white dark:bg-[#0B1120]'
+                    ? 'text-white border-transparent shadow-lg shadow-primary/10 scale-105'
+                    : 'text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/10 hover:border-primary/30 hover:text-primary bg-white dark:bg-[#0B1120]'
                   }`}
               >
                 {isActive && (
                   <motion.span
                     layoutId="activeIndicator"
-                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600 to-emerald-500 z-0 shadow-lg shadow-blue-500/20"
+                    className="absolute inset-0 rounded-xl bg-primary z-0 shadow-lg shadow-primary/20"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 )}

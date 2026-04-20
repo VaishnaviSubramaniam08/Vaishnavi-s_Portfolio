@@ -33,7 +33,7 @@ export const PROJECTS = [
     title: "Sales Management System",
     description: "Manages sales, customers, and transactions efficiently with a comprehensive dashboard.",
     tech: ["MongoDB", "Express.js", "React.js", "Node.js"],
-    category: "Full Stack",
+    category: "Desktop App",
     icon: "📊",
     color: "from-blue-500 to-cyan-400",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
@@ -42,13 +42,13 @@ export const PROJECTS = [
       "Sales analytics dashboard",
       "Invoice generation & reporting"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/Sales_management_system",
     live: "#"
   },
   {
     title: "Coconut Detection System",
     description: "AI-based computer vision system to detect coconut maturity and quality grading.",
-    tech: ["Python", "Machine Learning", "OpenCV", "TensorFlow"],
+    tech: ["Python", "Machine Learning", "OpenCV", "Yolo"],
     category: "AI / ML",
     icon: "🥥",
     color: "from-green-500 to-emerald-400",
@@ -58,7 +58,7 @@ export const PROJECTS = [
       "Quality grading with confidence score",
       "Dataset training & model evaluation"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/Automated_Coconut_Sorting",
     live: "#"
   },
   {
@@ -74,13 +74,13 @@ export const PROJECTS = [
       "Job listing & application management",
       "Resume upload & skill matching"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/job___portal",
     live: "#"
   },
   {
     title: "Learning Management System",
     description: "Online platform for courses, learning modules, and student progress tracking.",
-    tech: ["MongoDB", "React.js", "Node.js", "Firebase"],
+    tech: ["MongoDB", "React.js", "Node.js", "Express.js"],
     category: "Full Stack",
     icon: "🎓",
     color: "from-orange-500 to-amber-400",
@@ -90,7 +90,7 @@ export const PROJECTS = [
       "Progress tracking & certificates",
       "Live quizzes & leaderboard"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/Learning-Management-System",
     live: "#"
   },
   {
@@ -106,7 +106,7 @@ export const PROJECTS = [
       "Interactive map & weather forecasts",
       "Budget tracking & expense management"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/PickMyPlan",
     live: "#"
   },
   {
@@ -122,7 +122,7 @@ export const PROJECTS = [
       "Material usage reports & analytics",
       "Supplier contact management"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/Construction-Material-Inventory-Management-System",
     live: "#"
   },
   {
@@ -138,7 +138,7 @@ export const PROJECTS = [
       "Audio visualizer with animations",
       "Shuffle, repeat & volume controls"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/music-player01",
     live: "#"
   },
   {
@@ -154,7 +154,7 @@ export const PROJECTS = [
       "JWT-based auth & user profiles",
       "Comment system & social sharing"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/blog_website",
     live: "#"
   },
   {
@@ -170,14 +170,14 @@ export const PROJECTS = [
       "Automated test & deploy on push",
       "Rollback & monitoring integration"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/Devops_project",
     live: "#"
   },
   {
     title: "Art Gallery Website",
     description: "Digital gallery to showcase artworks with immersive visual presentation.",
-    tech: ["React.js", "Framer Motion", "CSS3"],
-    category: "Frontend",
+    tech: ["Figma", "Prototype"],
+    category: "UI/UX",
     icon: "🖼️",
     color: "from-fuchsia-500 to-pink-400",
     image: "https://images.unsplash.com/photo-1541512416146-3cf58d6b27cc?w=800&q=80",
@@ -186,7 +186,7 @@ export const PROJECTS = [
       "Artist profile & artwork detail pages",
       "Smooth scroll & entrance animations"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/Art-gallary",
     live: "#"
   },
   {
@@ -202,7 +202,7 @@ export const PROJECTS = [
       "Admin review & approval dashboard",
       "Notification & status tracking"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/Scholarship_portal",
     live: "#"
   },
   {
@@ -218,7 +218,7 @@ export const PROJECTS = [
       "Risk clause detection & highlighting",
       "Plain-English explanation of terms"
     ],
-    github: "https://github.com/VaishnaviSubramaniam08",
+    github: "https://github.com/VaishnaviSubramaniam08/AI_legal_analyzer",
     live: "#"
   }
 ];

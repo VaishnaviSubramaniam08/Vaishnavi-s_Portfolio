@@ -41,7 +41,7 @@ const ProjectCard = ({ project, index }) => {
 
                 {/* Overlay with Category - Strictly Blue/Green */}
                 <div className="absolute top-4 left-4 z-10">
-                    <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 backdrop-blur-md">
+                    <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-primary/30 bg-primary/10 text-primary backdrop-blur-md">
                         {category}
                     </span>
                 </div>
@@ -75,7 +75,7 @@ const ProjectCard = ({ project, index }) => {
             <div className="p-6 flex flex-col flex-grow">
                 <div className="flex items-center gap-2 mb-3">
                     <span className="text-xl drop-shadow-md">{icon}</span>
-                    <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight group-hover:text-blue-500 transition-colors duration-300">
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white leading-tight group-hover:text-primary transition-colors duration-300">
                         {title}
                     </h3>
                 </div>
@@ -113,7 +113,7 @@ const ProjectCard = ({ project, index }) => {
                         rel="noopener noreferrer"
                         className="flex items-center justify-between group/btn"
                     >
-                        <span className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300 group-hover/btn:text-blue-500 transition-colors uppercase tracking-wider">
+                        <span className="flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300 group-hover/btn:text-primary transition-colors uppercase tracking-wider">
                             Explore Source
                         </span>
                         <motion.div
@@ -127,7 +127,7 @@ const ProjectCard = ({ project, index }) => {
             </div>
 
             {/* Subtle Hover Glow Overlay - Blue/Green */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
         </motion.div>
     );
 };
