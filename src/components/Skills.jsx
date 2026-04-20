@@ -17,7 +17,27 @@ const FLOATING_SKILLS = [
   { name: "VS CODE", rotate: 14, yOffset: -12, icon: "vscode/vscode-original.svg" },
   { name: "GIT", rotate: -14, yOffset: 6, icon: "git/git-original.svg" },
   { name: "GITHUB", rotate: 9, yOffset: -20, icon: "github/github-original.svg", invertOnDark: true },
-  { name: "DOCKER", rotate: -4, yOffset: 10, icon: "docker/docker-original.svg" }
+  { name: "DOCKER", rotate: -4, yOffset: 10, icon: "docker/docker-original.svg" },
+  // { name: "Firebase", rotate: 9, yOffset: -6, icon: "firebase/firebase-plain.svg" },
+{ name: "NETLIFY", rotate: -11, yOffset: 16, icon: "netlify/netlify-original.svg" },
+{ name: "VERCEL", rotate: 6, yOffset: -14, icon: "vercel/vercel-original.svg", invertOnDark: true },
+{ 
+  name: "ELECTRON", 
+  rotate: 8, 
+  yOffset: -10, 
+  icon: "electron/electron-original.svg" 
+},
+  { name: "PYTHON", rotate: 10, yOffset: -15, icon: "python/python-original.svg" },
+  // { name: "Java", rotate: 5, yOffset: -20, icon: "java/java-original.svg" },
+  { name: "C", rotate: -7, yOffset: 14, icon: "c/c-original.svg" },
+
+  { name: "FIREBASE", rotate: 11, yOffset: -6, icon: "firebase/firebase-plain.svg" },
+  { name: "TAILWIND", rotate: -9, yOffset: 16, icon: "tailwindcss/tailwindcss-original.svg" },
+
+{ name: "DSA", rotate: -5, yOffset: 10, icon: "cplusplus/cplusplus-original.svg" },
+{ name: "OOP", rotate: 8, yOffset: -12, icon: "java/java-original.svg" },
+{ name: "DBMS", rotate: -9, yOffset: 15, icon: "mysql/mysql-original.svg" }
+
 ];
 
 const Skills = () => {

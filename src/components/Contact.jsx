@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import SectionTitle from './SectionTitle';
 import { Mail, Linkedin, Github, Send } from 'lucide-react';
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+  const form = useRef();
+  const [loading, setLoading] = useState(false);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    emailjs.sendForm(
+      "service_k3w7ldd",     // ✅ your service ID
+      "template_xpz0zhb",    // ✅ your template ID
+      form.current,
+      "g_cPwLJlT7Sc2QfhI"      // ❗ replace this
+    )
+    .then(() => {
+      alert("✅ Message sent successfully!");
+      form.current.reset();
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.log(error);
+      alert("❌ Failed to send message");
+      setLoading(false);
+    });
+  };
+
   return (
     <section id="contact" className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,62 +39,34 @@ const Contact = () => {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12 items-start">
-          {/* Contact Info */}
+
+          {/* Contact Info (unchanged) */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Contact Information</h3>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">
+              Contact Information
+            </h3>
+
             <p className="text-slate-600 dark:text-slate-400 text-lg">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+              I'm always open to discussing new projects, creative ideas, or opportunities.
             </p>
 
-            <div className="space-y-4">
-              <a 
-                href="mailto:vaishnavisubramaniam247@gmail.com" 
-                className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:border-primary transition-all group"
-              >
-                <div className="p-3 bg-primary/10 rounded-xl text-primary group-hover:bg-primary group-hover:text-white transition-all">
-                  <Mail size={24} />
-                </div>
-                <div>
-                  <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">Email Me</p>
-                  <p className="text-slate-900 dark:text-white font-semibold">vaishnavisubramaniam247@gmail.com</p>
-                </div>
-              </a>
+            <a href="mailto:vaishnavisubramaniam247@gmail.com" className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border shadow-sm">
+              <Mail size={24} />
+              <span className="font-semibold">vaishnavisubramaniam247@gmail.com</span>
+            </a>
 
-              <div className="flex gap-4">
-                <a 
-                  href="https://linkedin.com/in/vaishnavi-s" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:border-blue-600 transition-all group"
-                >
-                  <div className="p-3 bg-blue-600/10 rounded-xl text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                    <Linkedin size={24} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">LinkedIn</p>
-                    <p className="text-slate-900 dark:text-white font-semibold">Vaishnavi S</p>
-                  </div>
-                </a>
-                <a 
-                  href="https://github.com/Vaishnavi-S" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:border-slate-900 transition-all group"
-                >
-                  <div className="p-3 bg-slate-900/10 dark:bg-slate-100/10 rounded-xl text-slate-900 dark:text-slate-100 group-hover:bg-slate-900 dark:group-hover:bg-slate-100 group-hover:text-white dark:group-hover:text-slate-900 transition-all">
-                    <Github size={24} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-slate-500 uppercase font-bold tracking-wider">GitHub</p>
-                    <p className="text-slate-900 dark:text-white font-semibold">Vaishnavi-S</p>
-                  </div>
-                </a>
-              </div>
+            <div className="flex gap-4">
+              <a href="https://linkedin.com/in/vaishnaviubramaniam231" target="_blank" rel="noreferrer">
+                <Linkedin size={28} />
+              </a>
+              <a href="https://github.com/VaishnaviSubramaniam08" target="_blank" rel="noreferrer">
+                <Github size={28} />
+              </a>
             </div>
           </motion.div>
 
@@ -79,51 +77,68 @@ const Contact = () => {
             viewport={{ once: true }}
             className="p-8 bg-white dark:bg-slate-800 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-xl"
           >
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+            {/* ✅ IMPORTANT: ref + sendEmail */}
+            <form ref={form} onSubmit={sendEmail} className="space-y-6">
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Name</label>
+                  <label>Name</label>
                   <input 
-                    type="text" 
+                    type="text"
+                    name="user_name"   // ✅ REQUIRED
                     placeholder="John Doe"
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-transparent focus:border-primary rounded-xl focus:outline-none transition-all dark:text-white"
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 rounded-xl"
                   />
                 </div>
+
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Email</label>
+                  <label>Email</label>
                   <input 
-                    type="email" 
+                    type="email"
+                    name="user_email"  // ✅ REQUIRED
                     placeholder="john@example.com"
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-transparent focus:border-primary rounded-xl focus:outline-none transition-all dark:text-white"
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 rounded-xl"
                   />
                 </div>
               </div>
+
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Subject</label>
+                <label>Subject</label>
                 <input 
-                  type="text" 
+                  type="text"
+                  name="subject"      // ✅ REQUIRED
                   placeholder="Inquiry about project"
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-transparent focus:border-primary rounded-xl focus:outline-none transition-all dark:text-white"
+                  required
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 rounded-xl"
                 />
               </div>
+
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Message</label>
+                <label>Message</label>
                 <textarea 
-                  rows="4" 
+                  name="message"     // ✅ REQUIRED
+                  rows="4"
                   placeholder="How can I help you?"
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 border border-transparent focus:border-primary rounded-xl focus:outline-none transition-all dark:text-white resize-none"
+                  required
+                  className="w-full px-4 py-3 bg-gray-50 dark:bg-slate-900 rounded-xl"
                 ></textarea>
               </div>
+
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full py-4 bg-primary text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-lg shadow-primary/20"
+                disabled={loading}
+                className="w-full py-4 bg-primary text-white rounded-xl font-bold flex items-center justify-center gap-2"
               >
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
                 <Send size={18} />
               </motion.button>
+
             </form>
           </motion.div>
+
         </div>
       </div>
     </section>
