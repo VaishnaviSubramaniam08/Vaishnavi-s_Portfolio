@@ -13,6 +13,7 @@ import FloatingSocialSidebar from './components/FloatingSocialSidebar';
 import AnimatedBackground from './components/AnimatedBackground';
 import { ChevronUp } from 'lucide-react';
 import { animateScroll as scroll } from 'react-scroll';
+import Achievements from './components/Achievements';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -67,6 +68,7 @@ function App() {
           <About />
           <Skills />
           <Projects />
+          <Achievements /> 
           <CodingProfiles />
           <Contact />
         </main>

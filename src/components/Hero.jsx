@@ -4,7 +4,7 @@ import { ArrowRight, Download } from 'lucide-react';
 import { Link } from 'react-scroll';
 import profile from "./image.png";
 import CoderBackground from './CoderBackground';
-
+import resume from "../assets/resume.pdf";
 const Hero = () => {
   return (
     <section
@@ -63,14 +63,16 @@ const Hero = () => {
                 </motion.button>
               </Link>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 border-2 border-primary text-primary rounded-full flex items-center gap-2"
-              >
-                Download Resume
-                <Download size={18} />
-              </motion.button>
+              <a href={resume}  download>
+  <motion.button
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="px-8 py-3 border-2 border-primary text-primary rounded-full flex items-center gap-2"
+  >
+    Download Resume
+    <Download size={18} />
+  </motion.button>
+</a>
             </div>
           </motion.div>
 
