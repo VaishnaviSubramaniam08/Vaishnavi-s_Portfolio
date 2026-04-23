@@ -1,8 +1,11 @@
 export const ABOUT_TEXT = [
+  
   "Pre-final year CSE student from Tamil Nadu,",
+  "currently pursuing at Kongu Engineering College, Erode,",
   "passionate about full stack development,",
   "building scalable applications,",
   "aiming to become a top software engineer."
+
 ];
 
 export const SKILLS = [
