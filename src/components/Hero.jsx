@@ -4,23 +4,19 @@ import { ArrowRight, Download } from 'lucide-react';
 import { Link } from 'react-scroll';
 import profile from "./image.png";
 import CoderBackground from './CoderBackground';
-import resume from "../assets/resume.pdf";
+
 const Hero = () => {
   return (
     <section
       id="home"
       className="min-h-screen flex items-center justify-center pt-16 sm:pt-20 relative overflow-hidden"
     >
-      {/* Smooth Continuous Background Gradient */}
+      {/* Background Gradient */}
       <div 
         className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-blue-50/50 to-white dark:from-slate-900 dark:to-[#0B1120]"
-        style={{
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-        }}
       />
 
-      {/* Coder Background (renders over gradient, but under content) */}
+      {/* Coder Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <CoderBackground />
       </div>
@@ -52,6 +48,8 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start w-full sm:w-auto">
+
+              {/* View Projects */}
               <Link to="projects" smooth={true} duration={500}>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -63,16 +61,18 @@ const Hero = () => {
                 </motion.button>
               </Link>
 
-              <a href={resume}  download>
-  <motion.button
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-    className="w-full sm:w-auto px-6 sm:px-8 py-3 border-2 border-primary text-primary rounded-full flex items-center justify-center gap-2 min-h-[44px]"
-  >
-    Download Resume
-    <Download size={18} />
-  </motion.button>
-</a>
+              {/* Download Resume */}
+              <a href="/resume.pdf" download>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full sm:w-auto px-6 sm:px-8 py-3 border-2 border-primary text-primary rounded-full flex items-center justify-center gap-2 min-h-[44px]"
+                >
+                  Download Resume
+                  <Download size={18} />
+                </motion.button>
+              </a>
+
             </div>
           </motion.div>
 
@@ -97,7 +97,7 @@ const Hero = () => {
                 />
               </motion.div>
 
-              {/* Animated Rings behind image */}
+              {/* Animated Rings */}
               <motion.div 
                 className="absolute inset-0 rounded-full border-2 border-dashed border-primary/50 pointer-events-none"
                 animate={{ rotate: 360 }}
@@ -111,7 +111,7 @@ const Hero = () => {
                 style={{ scale: 1.25 }}
               />
               
-              {/* Core Glow behind image */}
+              {/* Glow */}
               <div className="absolute inset-0 rounded-full bg-primary/10 blur-[60px] -z-10 pointer-events-none" />
             </div>
           </motion.div>
