@@ -4,7 +4,7 @@ import SectionTitle from './SectionTitle';
 import ProjectCard from './ProjectCard';
 import { PROJECTS } from '../constants';
 
-const CATEGORIES = ['All', 'Full Stack', 'AI / ML', 'Frontend', 'Python', 'DevOps'];
+const CATEGORIES = ['All', 'Full Stack', 'AI / ML', 'Frontend', 'Python', 'DevOps','Desktop App','Mobile App'];
 
 const Projects = () => {
   const [active, setActive] = useState('All');
@@ -15,7 +15,7 @@ const Projects = () => {
   );
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden bg-slate-50 dark:bg-darkNavy transition-colors duration-300">
+    <section id="projects" className="py-16 sm:py-20 md:py-24 relative overflow-hidden bg-slate-50 dark:bg-darkNavy transition-colors duration-300">
       
       {/* Decorative Accents - Static for no-animation cursor experience */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -23,10 +23,10 @@ const Projects = () => {
         <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-emerald-500/[0.03] rounded-full blur-[120px]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
         
         {/* Section Header & Unified Stats */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 sm:gap-8 mb-12 sm:mb-16">
             <div className="max-w-2xl">
                 <SectionTitle
                     title="Featured Projects"
@@ -38,31 +38,31 @@ const Projects = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-6 p-1.5 px-6 py-3 bg-white/40 dark:bg-white/5 backdrop-blur-md rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm"
+                className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 p-2 sm:p-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-white/40 dark:bg-white/5 backdrop-blur-md rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm w-full sm:w-auto"
             >
                 <div className="flex flex-col items-center">
-                    <span className="text-2xl font-black text-primary">{PROJECTS.length}</span>
-                    <span className="text-[9px] uppercase tracking-[0.2em] text-slate-400 font-bold">Solutions</span>
+                    <span className="text-lg sm:text-xl md:text-2xl font-black text-primary">{PROJECTS.length}</span>
+                    <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-slate-400 font-bold">Solutions</span>
                 </div>
-                <div className="w-px h-8 bg-slate-200 dark:bg-white/10" />
+                <div className="w-px h-6 sm:h-8 bg-slate-200 dark:bg-white/10" />
                 <div className="flex flex-col items-center">
-                    <span className="text-2xl font-black text-emerald-500">
+                    <span className="text-lg sm:text-xl md:text-2xl font-black text-emerald-500">
                         {PROJECTS.filter(p => p.category === 'Full Stack').length}
                     </span>
-                    <span className="text-[9px] uppercase tracking-[0.2em] text-slate-400 font-bold">Full Stacks</span>
+                    <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.2em] text-slate-400 font-bold">Full Stacks</span>
                 </div>
             </motion.div>
         </div>
 
         {/* Categories - Stricly Blue/Green Theme */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
+        <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 md:gap-3 mb-10 sm:mb-12 md:mb-16">
           {CATEGORIES.map((cat) => {
             const isActive = active === cat;
             return (
               <button
                 key={cat}
                 onClick={() => setActive(cat)}
-                className={`relative px-6 py-2 rounded-xl text-xs font-bold transition-all duration-300 border
+                className={`relative px-2.5 sm:px-3 md:px-4 lg:px-6 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all duration-300 border min-h-[36px] sm:min-h-[40px] md:min-h-[44px] flex items-center justify-center
                   ${isActive
                     ? 'text-white border-transparent shadow-lg shadow-primary/10 scale-105'
                     : 'text-slate-500 dark:text-slate-400 border-slate-200 dark:border-white/10 hover:border-primary/30 hover:text-primary bg-white dark:bg-[#0B1120]'
@@ -82,7 +82,7 @@ const Projects = () => {
         </div>
 
         {/* Project Grid - Staggered viewport entrance only */}
-        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
           <AnimatePresence mode="popLayout" initial={false}>
             {filtered.map((project, index) => (
               <ProjectCard key={project.title} project={project} index={index} />
@@ -95,13 +95,13 @@ const Projects = () => {
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
-           className="mt-20 text-center"
+           className="mt-12 sm:mt-16 md:mt-20 text-center"
         >
           <a
             href="https://github.com/VaishnaviSubramaniam08"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-3 px-10 py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-xs uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:shadow-2xl dark:hover:shadow-white/20"
+            className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-xs uppercase tracking-widest transition-all duration-300 hover:scale-105 hover:shadow-2xl dark:hover:shadow-white/20 min-h-[44px] sm:min-h-[48px]"
           >
             <GithubIcon />
             Repository Archive

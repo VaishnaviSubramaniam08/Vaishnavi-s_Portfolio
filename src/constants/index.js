@@ -8,7 +8,7 @@ export const ABOUT_TEXT = [
 export const SKILLS = [
   {
     category: "Languages",
-    items: ["Java", "JavaScript", "Python"]
+    items: ["Java", "JavaScript", "Python","C"]
   },
   {
     category: "Frontend",
@@ -94,10 +94,10 @@ export const PROJECTS = [
     live: "#"
   },
   {
-    title: "Travel Planner",
+    title: "AI-Travel Planner",
     description: "Smart travel planning with maps, real-time chat, and weather API integration.",
-    tech: ["MERN Stack", "Google Maps API", "Weather API"],
-    category: "Full Stack",
+    tech: ["React-native", "MERN"],
+    category: "Mobile App",
     icon: "✈️",
     color: "from-sky-500 to-blue-400",
     image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80",
