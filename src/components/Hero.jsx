@@ -40,7 +40,7 @@ const Hero = () => {
             </h1>
 
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-600 dark:text-slate-400 mb-6 sm:mb-8">
-              Full Stack Developer | MERN | Java
+              Full Stack Developer | MERN | Java Developer
             </h2>
 
             <p className="text-base sm:text-lg text-slate-500 dark:text-slate-400 mb-8 sm:mb-10">
